@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+	<title>My Contacts</title>
+</head>
+<body>
+	<div class="container">
+		<h1 class="center-align">My Contacts!</h1>
+		<input type="text" id="filterinput" placeholder="search names...">
+		<ul id="names" class="collection with-header">
+			<li class="collection-header">
+				<h5>A</h5>
+			</li>
+			<li class="collection-item">
+				<a href="#">Abe</a>
+			</li>
+			<li class="collection-item">
+				<a href="#">Adam</a>
+			</li>
+			<li class="collection-item">
+				<a href="#">Anna</a>
+			</li>
+			<li class="collection-header">
+				<h5>B</h5>
+			</li>
+			<li class="collection-item">
+				<a href="#">Beck</a>
+			</li>
+			<li class="collection-item">
+				<a href="#">Beth</a>
+			</li>
+			<li class="collection-item">
+				<a href="#">Bora</a>
+			</li>
+				<li class="collection-header">
+				<h5>C</h5>
+			</li>
+			<li class="collection-item">
+				<a href="#">Cathy</a>
+			</li>
+			<li class="collection-item">
+				<a href="#">Carrel</a>
+			</li>
+			<li class="collection-item">
+				<a href="#">Cosa</a>
+			</li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		let filterinput = document.getElementById('filterinput');
+        filterinput.addEventListener('keyup',filterNames); 
+
+        function filterNames(){
+        	let filtervalue = document.getElementById('filterinput').value.toUpperCase();
+
+        	//get names ul
+        	let ul= document.getElementById('names');
+
+        	//get item lis
+        	let li = ul.querySelectorAll('li.collection-item'); 
+  
+        	//loop through each item lis
+        	for(let i = 0; i <= li.length ; i++){
+        		let a = li[i].getElementsByTagName('a')[0];
+        		if(a.innerHTML.toUpperCase().indexOf(filtervalue) > -1){
+                  li[i].style.display = '';
+        		}else{
+                  li[i].style.display = 'none' ;
+        		}
+        	}
+        } 
+	</script>
+</body>
+</html>
