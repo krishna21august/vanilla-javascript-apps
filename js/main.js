@@ -7,21 +7,26 @@ document.getElementById('myform').addEventListener('submit',saveBookmark);
 		var sitename = document.getElementById('siteName').value;
 		var siteUrl = document.getElementById('siteUrl').value;
 
-		if(!sitename || !siteUrl){
-			alert('Please Fill in the form');
+	    /*
+		localStorage.setItem('xcv','sdsad');
+		localStorage.getItem('xcv');
+		localStorage.removeItem('xcv');		
+		*/
+
+
+        if(!validateForm(sitename,siteUrl)){
+     
 			return false;
 		}
+
 
 		var bookmark = {
 			name : sitename,
 			site : siteUrl
 		}
 
-	    /*
-		localStorage.setItem('xcv','sdsad');
-		localStorage.getItem('xcv');
-		localStorage.removeItem('xcv');
-		*/
+
+
 
 		if(localStorage.getItem('bookmarks') === null){
 
@@ -35,6 +40,27 @@ document.getElementById('myform').addEventListener('submit',saveBookmark);
 			bookmarks.push(bookmark);
 			localStorage.setItem('bookmarks',JSON.stringify(bookmarks));
 		}
+
+		function validateForm(sitename,siteUrl){
+
+		if(!sitename || !siteUrl){
+			alert('Please Fill in the form');
+			return false;
+		}
+
+		var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+        var regex = new RegExp(expression);
+
+        if(!siteUrl.match(regex)){
+        	alert('Please use a valid Email');
+        	return false;
+        }
+
+		return true;
+
+
+    }
+
 	//stop form from submitting
 	   fetchbookmarks();
 	   event.preventDefault();
@@ -55,6 +81,9 @@ document.getElementById('myform').addEventListener('submit',saveBookmark);
    		}
 
    		localStorage.setItem('bookmarks',JSON.stringify(bookmarks));
+
+
+   		document.getElementById('myform').reset();
 
    		fetchbookmarks();
 
@@ -82,5 +111,6 @@ document.getElementById('myform').addEventListener('submit',saveBookmark);
 
     
     }
+
 
 }
